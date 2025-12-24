@@ -1,6 +1,12 @@
 import { useEffect, useState } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
-import { getTasks, createTask, updateTask, deleteTask } from "./http/tasks";
+import {
+    getTasks,
+    createTask,
+    updateTask,
+    deleteTask,
+    byPassCors,
+} from "./http/tasks";
 
 function App() {
     const [tasks, setTasks] = useState([]);
@@ -44,11 +50,12 @@ function App() {
     };
 
     useEffect(() => {
-        fetch(
-            "http://localhost:3000/bypass-cors?url=https://api-gateway.fullstack.edu.vn/api/analytics"
-        )
-            .then((res) => res.json())
-            .then((data) => console.log(data));
+        const http = async () => {
+            const res = await byPassCors();
+            console.log(res);
+        };
+
+        http();
     }, []);
 
     return (

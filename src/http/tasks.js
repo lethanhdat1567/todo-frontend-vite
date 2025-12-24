@@ -29,3 +29,12 @@ export const deleteTask = async (id) => {
         method: "DELETE",
     });
 };
+
+export const byPassCors = async () => {
+    const res = await fetch(
+        `${BASE_URL}/bypass-cors?url=https://api-gateway.fullstack.edu.vn/api/analytics`
+    );
+
+    const json = await res.json();
+    return json.data;
+};
